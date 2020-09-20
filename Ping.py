@@ -199,7 +199,7 @@ if __name__ == '__main__':
 
                 if received_time:
                     src_addr = socket.inet_ntoa(src_addr)
-                    rtt = (received_time - send_time)
+                    rtt = (received_time - sent_time)
 
                     rtt_list.append(rtt)
 
