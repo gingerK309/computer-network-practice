@@ -15,14 +15,13 @@ class IPHdr:
         self.src = socket.inet_aton(src)
         self.dst = socket.inet_aton(dst)
         self.proto = proto
-        self.ip_ver = proto
+        self.ip_ver = 4
         self.ip_hl = 5
         self.tos = 0
         self.tol = 0
         self.fid = 0
         self.f_rsv = 0
         self.f_dtf = 0
-        self.f_mrf = 0
         self.f_mrf = 0
         self.f_offset = 0
         self.ttl = 255
@@ -107,7 +106,7 @@ class ICMPHdr:
             raw_data = raw_data[:cls.ICMP_DEFAULT_SIZE]
         else:
             payload = ''.encode()
-        icmp_hdr.type, icmp_hdr.code, icmp_hdr.checksum, icmp_hdr.id, icmp_hdr.seq = struct.unpack('!BHHH', raw_data)
+        icmp_hdr.type, icmp_hdr.code, icmp_hdr.checksum, icmp_hdr.id, icmp_hdr.seq = struct.unpack('!BBHHH', raw_data)
         icmp_hdr.data = payload
 
         return icmp_hdr
