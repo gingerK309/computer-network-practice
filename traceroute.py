@@ -43,7 +43,7 @@ class IPHdr:
             raw_data = raw_data[:cls.IP_DEFAULT_SIZE]
         else:
             payload = ''.encode()
-        ip = struct.unpack('BBHHHBBH', raw_data[:-8])
+        ip = struct.unpack('!BBHHHBBH', raw_data[:-8])
 
         ip_hdr.ip_ver = ip[0] >> 4
         ip_hdr.ip_hl = ip[0] & 0x0F
@@ -272,7 +272,7 @@ if __name__ == '__main__':
 
                 if got_response and received_time:
                     try:
-                        messages[tries] = '[{0}, {1}]'.format(socket.gethostbyaddr(addr[0]),addr[0])
+                        messages[tries] = '[{0}, {1}]'.format(socket.gethostbyaddr(addr[0])[0],addr[0])
                     except socket.gaierror:
                         messages[tries] = '[{0}, {1}]'.format(addr[0],addr[0])
                     except socket.herror:
